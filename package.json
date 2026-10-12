@@ -1,0 +1,49 @@
+{
+  "name": "mcp-confirm-gate",
+  "version": "0.1.0",
+  "description": "Cryptographic human-in-the-loop confirmation gate for state-mutating MCP tools",
+  "type": "module",
+  "main": "./src/index.mjs",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.mjs"
+    },
+    "./canonical-json": {
+      "import": "./src/canonical-json.mjs"
+    }
+  },
+  "files": [
+    "src",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test test/gate.test.mjs"
+  },
+  "peerDependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "author": "RyanDev1st",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RyanDev1st/mcp-confirm-gate.git"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "confirmation",
+    "human-in-the-loop",
+    "security",
+    "guardrails",
+    "ai-agent"
+  ]
+}
