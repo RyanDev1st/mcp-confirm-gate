@@ -1,4 +1,4 @@
-import { createHmac, randomBytes } from 'node:crypto';
+import { createHmac, randomBytes, timingSafeEqual } from 'node:crypto';
 import { canonicalJson, hashArgs } from './canonical-json.mjs';
 
 /**
@@ -213,7 +213,8 @@ export function createConfirmGate(options = {}) {
         // Validate HMAC signature of stored record
         const expectedData = `${record.tool}:${record.argsHash}:${record.nonce}:${record.expiresAt}`;
         const expectedSig = createHmac('sha256', secretKey).update(expectedData).digest('hex');
-        if (record.signature !== expectedSig) {
+        const sigOk = typeof record.signature === 'string' && record.signature.length === expectedSig.length && timingSafeEqual(Buffer.from(record.signature), Buffer.from(expectedSig));
+        if (!sigOk) {
           return reject('unknown_token', record.argsHash);
         }
 
